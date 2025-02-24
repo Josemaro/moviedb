@@ -46,48 +46,54 @@ export default function Home() {
         Películas Populares
       </h1>
 
-      {loading ? (
-        <p className="text-center text-gray-500">Cargando películas...</p>
-      ) : (
-        <>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {movies && movies.length > 0 ? (
-              movies.map((movie) => (
-                <div
-                  key={movie.id}
-                  className="bg-gray-900 text-white p-4 rounded-lg"
-                >
-                  <Link href={`/movies/${movie.id}`} className="block">
-                    <div className="w-full bg-gray-700 flex items-center justify-center">
-                      {movie.poster_path ? (
-                        <Image
-                          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                          alt={movie.title}
-                          width={500}
-                          height={750}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <span className="text-gray-300">
-                          Imagen no disponible
-                        </span>
-                      )}
-                    </div>
-                    <h2 className="mt-2 text-center font-semibold">
-                      {movie.title}
-                    </h2>
-                  </Link>
-                </div>
-              ))
-            ) : (
-              <p className="text-center text-gray-500">
-                No se encontraron películas.
-              </p>
-            )}
-          </div>
+      <div className="h-full min-h-[100vh]">
+        {loading ? (
+          <p className="text-center text-gray-500">Cargando películas...</p>
+        ) : (
+          <>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {movies && movies.length > 0 ? (
+                movies.map((movie) => (
+                  <div
+                    key={movie.id}
+                    className="bg-gray-900 text-white p-4 rounded-lg"
+                  >
+                    <Link href={`/movies/${movie.id}`} className="block">
+                      <div className="w-full bg-gray-700 flex items-center justify-center">
+                        {movie.poster_path ? (
+                          <Image
+                            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                            alt={movie.title}
+                            width={500}
+                            height={750}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <span className="text-gray-300">
+                            Imagen no disponible
+                          </span>
+                        )}
+                      </div>
+                      <h2 className="mt-2 text-center font-semibold">
+                        {movie.title}
+                      </h2>
+                    </Link>
+                  </div>
+                ))
+              ) : (
+                <p className="text-center text-gray-500">
+                  No se encontraron películas.
+                </p>
+              )}
+            </div>
+          </>
+        )}
+      </div>
 
-          {/* Botones de paginación */}
-          <div className="flex justify-center mt-6 space-x-4">
+      {/* Botones de paginación */}
+      { totalPages && 
+        <div className="flex justify-center mt-6 space-x-4 sticky bottom-4 left-0 right-0">
+          <div className=" bg-cyan-950 p-4 rounded-lg">
             <button
               onClick={() => handlePageChange(page - 1)}
               disabled={page === 1}
@@ -116,8 +122,8 @@ export default function Home() {
               Siguiente
             </button>
           </div>
-        </>
-      )}
+        </div>
+      }
     </div>
   );
 }

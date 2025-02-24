@@ -21,5 +21,6 @@ export async function getMovieDetails(id) {
       Authorization: `Bearer ${AUTH_TOKEN}`
     }
   });
+  console.log(res.json)
   return res.json();
 }
